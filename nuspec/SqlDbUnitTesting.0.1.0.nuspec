@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>SqlDbUnitTesting</id>
+    <version>0.1.0</version>
+    <title>SqlDbUnitTesting</title>
+    <authors>Narami Kiyokura</authors>
+    <owners>Narami Kiyokura</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>https://github.com/kiyokura/SqlDbUnitTesting/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/kiyokura/SqlDbUnitTesting</projectUrl>
+    <description>Libraries that supports unit testing of the SQL Server Database Project.</description>
+    <summary>Libraries that supports unit testing of the SQL Server Database Project.</summary>
+    <dependencies>
+      <group targetFramework=".NETFramework4.7.2">
+        <dependency id="EPPlus" version="4.5.3.3" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="lib\net472\SqlDbUnitTesting.dll" target="lib\net472\SqlDbUnitTesting.dll" />
+  </files>
+</package>

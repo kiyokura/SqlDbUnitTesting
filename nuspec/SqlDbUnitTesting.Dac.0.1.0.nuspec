@@ -2,12 +2,15 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>SqlDbUnitTesting.Dac</id>
-    <version>1.0.0</version>
-    <title></title>
+    <version>0.1.0</version>
+    <title>SqlDbUnitTesting.Dac</title>
     <authors>Narami Kiyokura</authors>
     <owners>Narami Kiyokura</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>My package description.</description>
+    <licenseUrl>https://github.com/kiyokura/SqlDbUnitTesting/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/kiyokura/SqlDbUnitTesting</projectUrl>
+    <description>Libraries that supports unit testing of the SQL Server Database Project.</description>
+    <summary>Libraries that supports unit testing of the SQL Server Database Project.</summary>
     <dependencies>
       <group targetFramework=".NETFramework4.7.2">
         <dependency id="Microsoft.Build" version="16.6.0" />

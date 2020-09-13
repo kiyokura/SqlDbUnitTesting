@@ -15,11 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAppSample", "Samples
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "MyDataBase", "Samples\MyDataBase\MyDataBase.sqlproj", "{826FD4DF-F021-4B44-97B4-AC62A707A2BA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuspec", "nuspec", "{35D450DF-4D4C-4A5A-9D2B-CBDBDAA5AC0E}"
-	ProjectSection(SolutionItems) = preProject
-		nuspec\SqlDbUnitTesting.Dac.1.0.0.nuspec = nuspec\SqlDbUnitTesting.Dac.1.0.0.nuspec
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
