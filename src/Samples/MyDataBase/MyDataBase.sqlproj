@@ -58,7 +58,8 @@
     <Folder Include="Properties" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Table1.sql" />
-    <Build Include="DatabaseScalarFunction1.sql" />
+    <Build Include="fncAddInt.sql" />
+    <Build Include="Member.sql" />
+    <Build Include="spGetMember.sql" />
   </ItemGroup>
 </Project>

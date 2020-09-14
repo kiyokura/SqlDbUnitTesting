@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAppSample", "Samples
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "MyDataBase", "Samples\MyDataBase\MyDataBase.sqlproj", "{826FD4DF-F021-4B44-97B4-AC62A707A2BA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleUnitTestUsingNuGetPackage", "Samples\SampleUnitTestUsingNuGetPackage\SampleUnitTestUsingNuGetPackage.csproj", "{E80F2441-D1D8-4981-BB38-D06CC41D9810}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{826FD4DF-F021-4B44-97B4-AC62A707A2BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{826FD4DF-F021-4B44-97B4-AC62A707A2BA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{826FD4DF-F021-4B44-97B4-AC62A707A2BA}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{E80F2441-D1D8-4981-BB38-D06CC41D9810}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E80F2441-D1D8-4981-BB38-D06CC41D9810}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E80F2441-D1D8-4981-BB38-D06CC41D9810}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E80F2441-D1D8-4981-BB38-D06CC41D9810}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,6 +56,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{6BE5246F-32F4-4B95-BC12-FB2C7B67113E} = {8D0981A2-7C8A-45DE-939A-1A2C5BB346C2}
 		{826FD4DF-F021-4B44-97B4-AC62A707A2BA} = {8D0981A2-7C8A-45DE-939A-1A2C5BB346C2}
+		{E80F2441-D1D8-4981-BB38-D06CC41D9810} = {8D0981A2-7C8A-45DE-939A-1A2C5BB346C2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {21D0C78E-306A-42EE-A0A1-4B9034403ADB}

@@ -1,4 +1,4 @@
-﻿CREATE FUNCTION [dbo].[DatabaseScalarFunction1]
+﻿CREATE FUNCTION [dbo].[fncAddInt]
 (
   @param1 int,
   @param2 int
