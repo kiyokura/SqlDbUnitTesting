@@ -25,6 +25,15 @@ For .NET Framework 4.7.2.
 - Publisher
   - Publish dacpac to test database using DacFX.
 
+## Install
+Install the package from nuget.org.
+
+```ps
+PM> Install-Package SqlDbUnitTesting
+PM> Install-Package SqlDbUnitTesting.LocalDb
+PM> Install-Package SqlDbUnitTesting.DAC
+```
+
 ## Usage
 See Sample Project : `src\Samples\SampleUnitTestUsingNuGetPackage\SampleUnitTestUsingNuGetPackage.csproj`
 
