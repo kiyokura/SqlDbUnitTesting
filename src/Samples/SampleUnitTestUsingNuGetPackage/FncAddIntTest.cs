@@ -11,7 +11,7 @@ namespace SampleUnitTestUsingNuGetPackage
   [TestFixture]
   public class FncAddIntTest
   {
-    private GlobalSettings Settings = GlobalSettings.Instance;
+    private readonly GlobalSettings Settings = GlobalSettings.Instance;
 
     [Test]
     public void FncAddIntCanAdd()

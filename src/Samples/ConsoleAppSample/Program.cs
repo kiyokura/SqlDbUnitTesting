@@ -12,7 +12,7 @@ namespace ConsoleAppSample
 {
   class Program
   {
-    static void Main(string[] args)
+    static void Main(string[] _)
     {
       var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
