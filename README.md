@@ -4,6 +4,10 @@ Libraries that supports unit testing of the SQL Server Database Project.
 
 For .NET Framework 4.7.2.
 
+## NuGet Packages
+- https://www.nuget.org/packages/SqlDbUnitTesting/
+- https://www.nuget.org/packages/SqlDbUnitTesting.Dac/
+- https://www.nuget.org/packages/SqlDbUnitTesting.LocalDb/
 
 ## Libraries
 ### SqlDbUnitTesting
