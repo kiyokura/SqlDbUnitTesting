@@ -23,9 +23,11 @@ namespace SqlDbUnitTesting.Dac
         outputFilename = Path.GetFileNameWithoutExtension(outputFilename);
 
       var project = ProjectCollection.GlobalProjectCollection.LoadProject(sqlProjectFilePath);
-      project.SetProperty("OutputPath", outputDir);
+      project.SetProperty("OutDir", outputDir);
       project.SetProperty("SqlTargetName", outputFilename);
       var fileLogger = new FileLogger { Parameters = @"logfile=" + buildLogFile };
+
+      var xxxx = project.Xml.RawXml;
       return project.Build(new[] { fileLogger });
     }
 
