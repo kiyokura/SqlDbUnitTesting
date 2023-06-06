@@ -5,8 +5,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleAppSample
 {
@@ -52,11 +50,12 @@ namespace ConsoleAppSample
 
     static bool BuildDacpac(string projectPath, string dacpacDir, string dacpacFileName, string buildLogFile)
     {
+      var vsinfo = GetVisualStudioInfo();
       var globalProperty = new Dictionary<string, string>()
       {
         { "FromUnitTest","True"},
-        { "SQLDBExtensionsPath",@"C:\Program Files\Microsoft Visual Studio\2022\Professional\MSBuild\Microsoft\VisualStudio\v17.0\SSDT"},
-        { "VsInstallRoot",@"C:\Program Files\Microsoft Visual Studio\2022\Professional"}
+        { "SQLDBExtensionsPath",$"{vsinfo.path}\\MSBuild\\Microsoft\\VisualStudio\\{vsinfo.version}\\SSDT"},
+        { "VsInstallRoot",$"{vsinfo.path}"}
       };
 
       var builder = new Builder();
@@ -67,6 +66,20 @@ namespace ConsoleAppSample
     {
       var publisher = new Publisher();
       publisher.Publish(connectionString, targetDatabase, dacpacFile);
+    }
+
+    static (string version, string path) GetVisualStudioInfo()
+    {
+      foreach (var info in VisualStudioWhere.GetVisualStudioInstanceInfo().Where(x => !x.IsPreview).OrderByDescending(x => x.Version))
+      {
+        var majorVersion = $"v{info.Version.Split('.')[0]}.0";
+        var path = info.InstallationPath;
+        if (Directory.Exists($"{info.InstallationPath}\\MSBuild\\Microsoft\\VisualStudio\\{majorVersion}\\SSDT"))
+        {
+          return (majorVersion, path);
+        }
+      }
+      return ("", "");
     }
   }
 }
