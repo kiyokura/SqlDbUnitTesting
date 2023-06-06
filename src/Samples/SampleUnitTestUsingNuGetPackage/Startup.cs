@@ -24,7 +24,16 @@ namespace SampleUnitTestUsingNuGetPackage
 
       // create dacpac from sqlproj
       var builder = new SqlDbUnitTesting.Dac.Builder();
-      if (!builder.Build(settings.SqlProjectFile, settings.DacpacOutputDir, settings.DacpacFileName))
+
+      var vsinfo = GetVisualStudioInfo();
+      var globalProperty = new Dictionary<string, string>()
+      {
+        { "FromUnitTest","True"},
+        { "SQLDBExtensionsPath",$"{vsinfo.path}\\MSBuild\\Microsoft\\VisualStudio\\{vsinfo.version}\\SSDT"},
+        { "VsInstallRoot",$"{vsinfo.path}"}
+      };
+
+      if (!builder.Build(settings.SqlProjectFile, settings.DacpacOutputDir, settings.DacpacFileName, "logs/build.log", globalProperty))
       {
         throw new Exception("create dacpac failed.");
       }
@@ -41,6 +50,20 @@ namespace SampleUnitTestUsingNuGetPackage
       var dt = ExcelReader.Read(Path.Combine(settings.BasePath, "Initialdata.xlsx"), "Member");
       var loader = new DataLoader(settings.ConnectionString);
       loader.Load(dt, true);
+    }
+
+    static (string version, string path) GetVisualStudioInfo()
+    {
+      foreach (var info in VisualStudioWhere.GetVisualStudioInstanceInfo().Where(x => !x.IsPreview).OrderByDescending(x => x.Version))
+      {
+        var majorVersion = $"v{info.Version.Split('.')[0]}.0";
+        var path = info.InstallationPath;
+        if (Directory.Exists($"{info.InstallationPath}\\MSBuild\\Microsoft\\VisualStudio\\{majorVersion}\\SSDT"))
+        {
+          return (majorVersion, path);
+        }
+      }
+      return ("", "");
     }
   }
 }
