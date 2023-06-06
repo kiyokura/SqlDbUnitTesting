@@ -103,8 +103,8 @@
     <Reference Include="SqlDbUnitTesting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SqlDbUnitTesting.1.0.0.1\lib\net472\SqlDbUnitTesting.dll</HintPath>
     </Reference>
-    <Reference Include="SqlDbUnitTesting.Dac, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SqlDbUnitTesting.Dac.1.1.0\lib\net472\SqlDbUnitTesting.Dac.dll</HintPath>
+    <Reference Include="SqlDbUnitTesting.Dac, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SqlDbUnitTesting.Dac.1.2.0\lib\net472\SqlDbUnitTesting.Dac.dll</HintPath>
     </Reference>
     <Reference Include="SqlDbUnitTesting.LocalDb, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SqlDbUnitTesting.LocalDb.1.0.0\lib\net472\SqlDbUnitTesting.LocalDb.dll</HintPath>
@@ -178,6 +178,7 @@
     <Compile Include="SpGetMemberTest.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VisualStudioWhere.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -16,12 +16,13 @@
     <ModelCollation>1033, CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <TargetLanguage>CS</TargetLanguage>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <SqlServerVerification>False</SqlServerVerification>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -46,14 +47,25 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
-    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
-    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
-    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
-  </PropertyGroup>
-  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
-  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Choose>
+    <!-- Loading MSBuild task target -->
+    <When Condition="$(FromUnitTest) != 'True'">
+      <!-- Description when loaded as a DB project in Visual Studio : If the project does not load correctly when the solution is loaded in VS, fix here -->
+      <PropertyGroup>
+        <SqlTasksTargetsPath Condition="'$(SQLDBExtensionsRefPath)' != ''">$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets</SqlTasksTargetsPath>
+        <SqlTasksTargetsPath Condition="'$(SQLDBExtensionsRefPath)' == ''">$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets</SqlTasksTargetsPath>
+      </PropertyGroup>
+    </When>
+    <When Condition="$(FromUnitTest) == 'True'">
+      <!-- Description when reading from another process, such as a unit test project : Adjust here if Microsoft.Data.Tools.Schema.SqlTasks.targets fails to load when unit tests run -->
+      <PropertyGroup>
+        <!-- Set "SQLDBExtensionsRefPath" property From caller process (ex. "C:\Program Files\Microsoft Visual Studio\2022\Professional\MSBuild\Microsoft\VisualStudio\v17.0\SSDT" ) -->
+        <SqlTasksTargetsPath>$(SQLDBExtensionsPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets</SqlTasksTargetsPath>
+        <!-- <SqlTasksTargetsPath>C:\Program Files\Microsoft Visual Studio\2022\Professional\MSBuild\Microsoft\VisualStudio\v17.0\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets</SqlTasksTargetsPath> -->
+      </PropertyGroup>
+    </When>
+  </Choose>
+  <Import Project="$(SqlTasksTargetsPath)" />
   <ItemGroup>
     <Folder Include="Properties" />
   </ItemGroup>
