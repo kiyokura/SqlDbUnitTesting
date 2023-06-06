@@ -22,6 +22,7 @@ namespace ConsoleAppSample
 
       // Build dacpac
       Console.WriteLine("Buidling dacpac ...");
+
       if (!BuildDacpac(projectPath, dacpacDir, dacpacFileName, @"logs/build.log"))
       {
         Console.WriteLine(@"Generating dacpac file failed. See :logs/build.log");
@@ -51,8 +52,15 @@ namespace ConsoleAppSample
 
     static bool BuildDacpac(string projectPath, string dacpacDir, string dacpacFileName, string buildLogFile)
     {
+      var globalProperty = new Dictionary<string, string>()
+      {
+        { "FromUnitTest","True"},
+        { "SQLDBExtensionsPath",@"C:\Program Files\Microsoft Visual Studio\2022\Professional\MSBuild\Microsoft\VisualStudio\v17.0\SSDT"},
+        { "VsInstallRoot",@"C:\Program Files\Microsoft Visual Studio\2022\Professional"}
+      };
+
       var builder = new Builder();
-      return builder.Build(projectPath, dacpacDir, dacpacFileName, buildLogFile);
+      return builder.Build(projectPath, dacpacDir, dacpacFileName, buildLogFile, globalProperty);
     }
 
     static void DeployDacpac(string connectionString, string targetDatabase, string dacpacFile)
