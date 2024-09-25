@@ -34,15 +34,15 @@ namespace ConsoleAppSample
       //  Need : installing SQL Server LocalDB.
       Console.WriteLine("Creating LocalDb instance ... ");
       LocalDbUtility.CreateInstance("TestDbInstance", "13.0", true);
-      LocalDbUtility.CreateDatabase("TestDbInstance", "MyTestDB");
+      LocalDbUtility.CreateDatabase("TestDbInstance", "MyTestDB", "Japanese_CI_AS", true);
       var connectionString = LocalDbUtility.GetConnectionString("TestDbInstance", "MyTestDB");
 
       Console.WriteLine("...done. ");
 
       // Deploy dacpac to LocalDb
-      Console.WriteLine("Deploying dacpac ...");
-      DeployDacpac(connectionString, "MyTestDB", Path.Combine(basePath, @"dacpac", dacpacFileName));
-      Console.WriteLine("...done. ");
+      //Console.WriteLine("Deploying dacpac ...");
+      //DeployDacpac(connectionString, "MyTestDB", Path.Combine(basePath, @"dacpac", dacpacFileName));
+      //Console.WriteLine("...done. ");
 
       Console.WriteLine("\nPress any key to exit.");
       Console.ReadKey();

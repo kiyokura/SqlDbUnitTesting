@@ -1,7 +1,9 @@
 ﻿using MartinCostello.SqlLocalDb;
 using System;
 using System.Data;
+using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace SqlDbUnitTesting.LocaDb
 {
@@ -37,25 +39,33 @@ namespace SqlDbUnitTesting.LocaDb
     /// </summary>
     /// <param name="instanceName">instance name</param>
     /// <param name="databaseName">database name</param>
-    public static void CreateDatabase(string instanceName, string databaseName)
+    /// <param name="collation">Collation(default:SQL_Latin1_General_CP1_CI_AS)</param>
+    /// <param name="isPartialContainedDatabase">true : Make database by Partially Contained Database</param>
+    /// <remarks>
+    /// if deploying dacpac, Partially Contained Database settings must also be done in dacpac.
+    /// </remarks>
+    public static void CreateDatabase(string instanceName, string databaseName, string collation = "SQL_Latin1_General_CP1_CI_AS", bool isPartialContainedDatabase = false)
     {
       var connectionString = GetConnectionString(instanceName, "master");
-      var path = System.IO.Path.Combine(GetInstancePath(instanceName), databaseName + ".mdf");
-
-      var nameSring = "'" + databaseName + "'";
-      var filePath = "'" + path + "'";
-      var sql = $"create database {databaseName}"
-                    + $" on ( "
-                    + $"   name = {nameSring},"
-                    + $"   filename = {filePath}"
-                    + $" )";
+      var mdfPath = System.IO.Path.Combine(GetInstancePath(instanceName), databaseName + ".mdf");
+      var sql = new StringBuilder();
+      if (isPartialContainedDatabase)
+      {
+        sql.AppendLine("EXEC sp_configure 'contained database authentication', 1;");
+        sql.AppendLine("RECONFIGURE;");
+      }
+      sql.AppendLine($"CREATE DATABASE {databaseName} ON (NAME = '{databaseName}', FILENAME='{mdfPath}') COLLATE {collation};");
+      if (isPartialContainedDatabase)
+      {
+        sql.AppendLine($"ALTER DATABASE [{databaseName}] SET CONTAINMENT = PARTIAL WITH NO_WAIT;");
+      }
 
       using (var cn = new System.Data.SqlClient.SqlConnection(connectionString))
       {
         cn.Open();
         using (var cmd = cn.CreateCommand())
         {
-          cmd.CommandText = sql;
+          cmd.CommandText = sql.ToString();
           cmd.CommandType = CommandType.Text;
           cmd.ExecuteNonQuery();
         }
@@ -70,7 +80,7 @@ namespace SqlDbUnitTesting.LocaDb
     /// <returns>connection string for the database of the SQL Serer LocalDB</returns>
     public static string GetConnectionString(string instanceName, string databaseName)
     {
-      const string connectionStringBase = "Data Source=(localdb)\\{0};Initial Catalog={1};Integrated Security=True;Persist Security Info=False;Pooling=False;";
+      const string connectionStringBase = "Data Source=(localdb)\\{0};Initial Catalog={1};Integrated Security=True;Persist Security Info=True;Pooling=False;";
       return GetConnectionString(connectionStringBase, instanceName, databaseName);
     }
 
